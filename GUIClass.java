@@ -20,7 +20,7 @@ public class GUIClass implements KeyListener{
     {
         JFrame guiFrame = new JFrame();
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.setTitle("Huston Family Music Database");
+        guiFrame.setTitle("Family Music Database");
         guiFrame.add(mainPanel());
         guiFrame.addKeyListener(this);
         guiFrame.pack();
