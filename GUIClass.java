@@ -13,8 +13,9 @@ import java.sql.*;
  *
  * @author Sean
  */
-public class GUIClass implements KeyListener{
-    private String text;
+public class GUIClass{
+    private String query;
+    private String url;
     
     private void initFrame()
     {
@@ -22,7 +23,6 @@ public class GUIClass implements KeyListener{
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         guiFrame.setTitle("Family Music Database");
         guiFrame.add(mainPanel());
-        guiFrame.addKeyListener(this);
         guiFrame.pack();
         guiFrame.setVisible(true);
     }
@@ -78,9 +78,9 @@ public class GUIClass implements KeyListener{
         BoxLayout box = new BoxLayout(querySetPanel,BoxLayout.Y_AXIS);
         querySetPanel.setLayout(box);
         querySetPanel.setPreferredSize(new Dimension(200,450));
-        querySetPanel.add(blankPanel(150,25));
+        querySetPanel.add(blankPanel(150,25));  
         querySetPanel.add((textPanel(150,25,"Search:")));
-        querySetPanel.add(queryField());
+        querySetPanel.add(queryField());        
         querySetPanel.add(blankPanel(150,300));
         querySetPanel.add(textPanel(150,25,"Enter a playlist link: "));
         querySetPanel.add(setField());
@@ -92,6 +92,26 @@ public class GUIClass implements KeyListener{
     {
         JTextField queryField = new JTextField();
         queryField.setMaximumSize(new Dimension(175,25));
+        queryField.addKeyListener(new KeyListener(){
+            @Override
+            public void keyReleased(KeyEvent e)
+            {
+                query = queryField.getText();
+                System.out.println(query);
+            }
+            
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                
+            }
+            
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                
+            }
+        });
         return(queryField);
     }
     
@@ -99,34 +119,39 @@ public class GUIClass implements KeyListener{
     {
         JTextField setField = new JTextField();
         setField.setMaximumSize(new Dimension(175,25));
+        setField.addKeyListener(new KeyListener(){
+            private boolean controlSwitch = false;
+            @Override
+            public void keyReleased(KeyEvent e)
+            {
+                if(!url.equals(setField.getText()))
+                {
+                    url = setField.getText();
+                    System.out.println(url);
+                }
+                
+            }
+            
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                
+            }
+            
+            @Override
+            public void keyTyped(KeyEvent e)
+            {
+                
+            }
+        });
         return(setField);
     }
     
     public GUIClass()
     {        
+        query = url = "";
         initFrame();
     }
     
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-        
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        System.out.println("1" + e.getKeyChar());
-        if(e.getKeyCode() == KeyEvent.VK_ENTER);
-        {
-            //Implementation for music download here
-        }
-    }
-    
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-        System.out.println("1" + e.getKeyChar());
-        text += e.getKeyChar();
-    }
+    //use getcomponentnumber method to find the index of the textfields
 }
